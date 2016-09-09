@@ -1,16 +1,18 @@
 # dairyNotes
-#通过递归遍历获取嵌套iframe中的dom元素(jquery编写)
+#通过递归遍历获取嵌套iframe中的jq元素(jquery编写)
 
 <script type = "text/javascript">
 
-1、根据选择器获取iframe中的单个dom元素
+//如果需要获取dom元素，可以自行修改函数，将jq元素转换成dom元素返回即可
+
+1、根据选择器获取iframe中的单个jq元素
 /**
  * @param  {[框架]}
  * @param  {[选择器]}
- * @return {[dom元素]}
+ * @return {[jq元素]}
  * 如果查找的选择器有多个，则只会返回查找的第一个元素
  */
-    var elem = null;	//保存找到的dom元素
+    var elem = null;	//保存找到的jq元素
     var flag = true;  //跳出循环的变量控制
     function getFrameDocument(iframe, selector) {
         var frames = iframe.frames;
@@ -27,7 +29,7 @@
                     // console.log("找到了");
                     // console.log($(frames[i].document).find(selector));
                     elem = $(frames[i].document).find(selector);
-                    flag = false;	//找到dom元素时，将flag设置为false
+                    flag = false;	//找到jq元素时，将flag设置为false
                     break;	//跳出本层循环
                 }
                 getFrameDocument(frames[i], selector);	//递归调用
@@ -39,15 +41,15 @@
     console.log(a[0]);
     
     
-2、根据选择器获取iframe中的多个dom元素    
+2、根据选择器获取iframe中的多个jq元素    
 /**
  * @param  {[框架]}
  * @param  {[选择器]}
- * @return {[dom元素数组]}
+ * @return {[jq元素数组]}
  * 如果查询的选择器的选择元素有多个，则返回全部的查找元素，
  * 以数组形式返回
  */
-var arr = [];    //保存找到的dom元素
+var arr = [];    //保存找到的jq元素
 function getFrameDocuments(iframe, selector) {
     var frames = iframe.frames;
     // console.log("the length:    " + frames.length);
@@ -63,11 +65,7 @@ function getFrameDocuments(iframe, selector) {
     }
     return arr;
 }
-var a = getFrameDocuments(top, "td");
+var a = getFrameDocuments(top, ".hello");
 console.log(a);
 
-    
-    
-    
-    
 </script>
